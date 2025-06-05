@@ -50,24 +50,24 @@ public class QuizFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        palavra.setFont(new java.awt.Font("Liberation Sans", 0, 24));
+        palavra.setFont(new java.awt.Font("Aial", 0, 24));
         palavra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        resposta1.setFont(new java.awt.Font("Liberation Sans", 0, 14));
+        resposta1.setFont(new java.awt.Font("Arial", 0, 14));
         resposta1.addActionListener(evt -> respostaActionPerformed(resposta1.getText()));
 
-        resposta2.setFont(new java.awt.Font("Liberation Sans", 0, 14));
+        resposta2.setFont(new java.awt.Font("Arial", 0, 14));
         resposta2.addActionListener(evt -> respostaActionPerformed(resposta2.getText()));
 
-        resposta3.setFont(new java.awt.Font("Liberation Sans", 0, 14));
+        resposta3.setFont(new java.awt.Font("Arial", 0, 14));
         resposta3.addActionListener(evt -> respostaActionPerformed(resposta3.getText()));
 
-        resposta4.setFont(new java.awt.Font("Liberation Sans", 0, 14));
+        resposta4.setFont(new java.awt.Font("Arial", 0, 14));
         resposta4.addActionListener(evt -> respostaActionPerformed(resposta4.getText()));
 
-        resultAsnw.setFont(new java.awt.Font("Liberation Sans", 1, 18));
+        resultAsnw.setFont(new java.awt.Font("Arial", 1, 18));
 
-        nextQuestion.setFont(new java.awt.Font("Liberation Sans", 0, 15));
+        nextQuestion.setFont(new java.awt.Font("Arial", 0, 15));
         nextQuestion.addActionListener(evt -> nextQuestionActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
