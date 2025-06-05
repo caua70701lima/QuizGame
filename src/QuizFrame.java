@@ -32,7 +32,7 @@ public class QuizFrame extends javax.swing.JFrame {
         perguntas.add(new Pergunta("oxigenio", new String[]{"oxigênio", "oxigenio", "oxigénio", "oxígeneo"}, "oxigênio"));
         perguntas.add(new Pergunta("substantivo", new String[]{"substantivo", "substantìvo", "substântivo", "substantívo"}, "substantivo"));
         perguntas.add(new Pergunta("circunferencia", new String[]{"circumferência", "circunferência", "circunferencia",  "circunferençia"}, "circunferência"));
-        perguntas.add(new Pergunta("inconstitucionalissimamente", new String[]{"inconstitucionalissimamente", "inconstitucionalíssimamente", "inconstitucionalissimaménte", "inconstitucionalisimamente"}, "inconstitucionalissimamente"));
+        perguntas.add(new Pergunta("inconstitucionalissimamente", new String[]{"inconstitucionalissimamente", "inconstitucionalíssimamente", "inconstitucionalissimaménte", "inconstitucionalissímamente"}, "inconstitucionalissimamente"));
         perguntas.add(new Pergunta("otorrinolaringologista", new String[]{ "otorrinolaringólogista", "otorrinolaringologista", "otorrinólaringologista", "otorrinolaringologísta"}, "otorrinolaringologista"));
         perguntas.add(new Pergunta("tranquilo", new String[]{"tranquilo", "tranquílo", "trânquilo", "tranquïlo"}, "tranquilo"));
         perguntas.add(new Pergunta("sofa", new String[]{"sofa", "sófa", "sofá", "sôfa"}, "sofá"));
@@ -136,6 +136,7 @@ public class QuizFrame extends javax.swing.JFrame {
             resposta4.setEnabled(true);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Fim do quiz! Você acertou " + pontuacao + " perguntas.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Projeto desenvolvido por: Cauã Lima, Nário César, Daniel Henrique, Thomé da Silva, Rykelme Andu e Matheus Gabriel");
             System.exit(0);
         }
     }
