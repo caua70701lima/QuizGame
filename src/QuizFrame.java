@@ -1,123 +1,114 @@
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
-public class QuizFrame extends javax.swing.JFrame {
-    private List<Pergunta> perguntas;
+public class QuizFrame extends JFrame {
+    private java.util.List<Pergunta> perguntas;
     private int perguntaAtual = 0;
     private int pontuacao = 0;
 
-    private javax.swing.JLabel palavra;
-    private javax.swing.JButton resposta1;
-    private javax.swing.JButton resposta2;
-    private javax.swing.JButton resposta3;
-    private javax.swing.JButton resposta4;
-    private javax.swing.JLabel resultAsnw;
-    private javax.swing.JButton nextQuestion;
+    private JLabel palavra;
+    private JButton resposta1;
+    private JButton resposta2;
+    private JButton resposta3;
+    private JButton resposta4;
+    private JLabel resultAsnw;
+    private JButton nextQuestion;
 
     public QuizFrame() {
-        initComponents();
+        setTitle("Quiz de Acentuação");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        JOptionPane.showMessageDialog(this, "Seja bem vindo ao quiz de acentuação!");
+        JOptionPane.showMessageDialog(this, "São 10 perguntas no total, questões de multipla escolha!"
+                + " Você deve escolher a alternativa correta, mas lembre-se nem todas têm acento. Boa Sorte!!");
+
+        // Definir fonte
+        Font fontLabel = new Font("Liberation Sans", Font.PLAIN, 24);
+        Font fontButton = new Font("Liberation Sans", Font.PLAIN, 24);
+        Font fontResult = new Font("Liberation Sans", Font.BOLD, 18);
+
+        // Inicializar componentes
+        palavra = new JLabel();
+        palavra.setFont(fontLabel);
+        palavra.setHorizontalAlignment(SwingConstants.CENTER);
+
+        resposta1 = new JButton();
+        resposta1.setFont(fontButton);
+        resposta1.addActionListener(evt -> respostaActionPerformed(resposta1.getText()));
+
+        resposta2 = new JButton();
+        resposta2.setFont(fontButton);
+        resposta2.addActionListener(evt -> respostaActionPerformed(resposta2.getText()));
+
+        resposta3 = new JButton();
+        resposta3.setFont(fontButton);
+        resposta3.addActionListener(evt -> respostaActionPerformed(resposta3.getText()));
+
+        resposta4 = new JButton();
+        resposta4.setFont(fontButton);
+        resposta4.addActionListener(evt -> respostaActionPerformed(resposta4.getText()));
+
+        resultAsnw = new JLabel();
+        resultAsnw.setFont(fontResult);
+        resultAsnw.setHorizontalAlignment(SwingConstants.CENTER);
+
+        nextQuestion = new JButton();
+        nextQuestion.setFont(fontButton);
+        nextQuestion.addActionListener(evt -> nextQuestionActionPerformed(evt));
+
+        // Adicionar componentes ao layout
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.weightx = 3.0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        add(palavra, gbc);
+
+        gbc.gridy = 1;
+        add(resultAsnw, gbc);
+
+        gbc.gridwidth = 1;
+        gbc.gridy = 2;
+        add(resposta1, gbc);
+
+        gbc.gridx = 1;
+        add(resposta2, gbc);
+
+        gbc.gridy = 3;
+        gbc.gridx = 0;
+        add(resposta3, gbc);
+
+        gbc.gridx = 1;
+        add(resposta4, gbc);
+
+        gbc.gridy = 4;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        add(nextQuestion, gbc);
+
+        pack();
+        setMinimumSize(new Dimension(400, 300));
+
         inicializarPerguntas();
         carregarPergunta();
     }
 
     private void inicializarPerguntas() {
-        perguntas = new ArrayList<>();
+        perguntas = new java.util.ArrayList<>();
         perguntas.add(new Pergunta("agua", new String[]{ "àgua", "agúa", "água","ãgua"}, "água"));
         perguntas.add(new Pergunta("maquinario", new String[]{"máquinario", "maquinário", "maquìnario", "maquinarío"}, "maquinário"));
         perguntas.add(new Pergunta("oxigenio", new String[]{"oxigênio", "oxigenio", "oxigénio", "oxígeneo"}, "oxigênio"));
         perguntas.add(new Pergunta("substantivo", new String[]{"substantivo", "substantìvo", "substântivo", "substantívo"}, "substantivo"));
-        perguntas.add(new Pergunta("circunferencia", new String[]{"circumferência", "circunferência", "circunferencia",  "circunferençia"}, "circunferência"));
-        perguntas.add(new Pergunta("inconstitucionalissimamente", new String[]{"inconstitucionalissimamente", "inconstitucionalíssimamente", "inconstitucionalissimaménte", "inconstitucionalissímamente"}, "inconstitucionalissimamente"));
-        perguntas.add(new Pergunta("otorrinolaringologista", new String[]{ "otorrinolaringólogista", "otorrinolaringologista", "otorrinólaringologista", "otorrinolaringologísta"}, "otorrinolaringologista"));
+        perguntas.add(new Pergunta("circunferencia", new String[]{"circunferencía", "circunferência", "circunferencia",  "circunferenciâ"}, "circunferência"));
+        perguntas.add(new Pergunta("inconstitucionalissimamente", new String[]{"inconstitucionalissimamente", "inconstitucionalíssimamente", "inconstitucionalissimaménte", "inconstitucionalissimamenté"}, "inconstitucionalissimamente"));
+        perguntas.add(new Pergunta("otorrinolaringologista", new String[]{ "otorrinolaringologistá", "otorrinolaringologista", "otorrinolaringológista", "otorrinolaringologísta"}, "otorrinolaringologista"));
         perguntas.add(new Pergunta("tranquilo", new String[]{"tranquilo", "tranquílo", "trânquilo", "tranquïlo"}, "tranquilo"));
         perguntas.add(new Pergunta("sofa", new String[]{"sofa", "sófa", "sofá", "sôfa"}, "sofá"));
         perguntas.add(new Pergunta("impar", new String[]{"impár","ìmpar","ímpar","impar"}, "ímpar"));
-}
-
-    private void initComponents() {
-        palavra = new javax.swing.JLabel();
-        resposta1 = new javax.swing.JButton();
-        resposta2 = new javax.swing.JButton();
-        resposta3 = new javax.swing.JButton();
-        resposta4 = new javax.swing.JButton();
-        resultAsnw = new javax.swing.JLabel();
-        nextQuestion = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        palavra.setFont(new java.awt.Font("Aial", 0, 24));
-        palavra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        resposta1.setFont(new java.awt.Font("Arial", 0, 14));
-        resposta1.addActionListener(evt -> respostaActionPerformed(resposta1.getText()));
-
-        resposta2.setFont(new java.awt.Font("Arial", 0, 14));
-        resposta2.addActionListener(evt -> respostaActionPerformed(resposta2.getText()));
-
-        resposta3.setFont(new java.awt.Font("Arial", 0, 14));
-        resposta3.addActionListener(evt -> respostaActionPerformed(resposta3.getText()));
-
-        resposta4.setFont(new java.awt.Font("Arial", 0, 14));
-        resposta4.addActionListener(evt -> respostaActionPerformed(resposta4.getText()));
-
-        resultAsnw.setFont(new java.awt.Font("Arial", 1, 18));
-
-        nextQuestion.setFont(new java.awt.Font("Arial", 0, 15));
-        nextQuestion.addActionListener(evt -> nextQuestionActionPerformed(evt));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(resposta1)
-                    .addComponent(resposta4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resposta2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(resposta3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(85, 85, 85))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(resultAsnw))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(nextQuestion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(palavra, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(palavra, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(resultAsnw)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(resposta2)
-                    .addComponent(resposta1))
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(resposta3)
-                    .addComponent(resposta4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nextQuestion)
-                .addGap(20, 20, 20))
-        );
-
-        pack();
     }
 
     private void carregarPergunta() {
@@ -135,8 +126,8 @@ public class QuizFrame extends javax.swing.JFrame {
             resposta3.setEnabled(true);
             resposta4.setEnabled(true);
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Fim do quiz! Você acertou " + pontuacao + " perguntas.");
-            javax.swing.JOptionPane.showMessageDialog(this, "Projeto desenvolvido por: Cauã Lima, Nário César, Daniel Henrique, Thomé da Silva, Rykelme Andu e Matheus Gabriel");
+            JOptionPane.showMessageDialog(this, "Fim do quiz! Você acertou " + pontuacao + " perguntas.");
+            JOptionPane.showMessageDialog(this, "Projeto desenvolvido por: Cauã Lima, Nário César, Daniel Henrique, Thomé da Silva, Rykelme Andu e Matheus Gabriel");
             System.exit(0);
         }
     }
@@ -145,15 +136,15 @@ public class QuizFrame extends javax.swing.JFrame {
         Pergunta pergunta = perguntas.get(perguntaAtual);
         if (respostaSelecionada.equals(pergunta.getRespostaCorreta())) {
             resultAsnw.setText("Resposta Correta");
-            resultAsnw.setForeground(Color.green);
+            resultAsnw.setForeground(Color.GREEN);
             pontuacao++;  
         } else {
             resultAsnw.setText("Resposta Errada");
-            resultAsnw.setForeground(Color.red);
+            resultAsnw.setForeground(Color.RED);
         }
         nextQuestion.setText("Próximo");
-        nextQuestion.setBackground(Color.white);
-        SoftBevelBorder bevelBorder = new SoftBevelBorder(BevelBorder.RAISED, Color.lightGray, Color.white);
+        nextQuestion.setBackground(Color.WHITE);
+        SoftBevelBorder bevelBorder = new SoftBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, Color.WHITE);
         EmptyBorder padding = new EmptyBorder(4, 8, 4, 8);
         CompoundBorder compoundBorder = new CompoundBorder(bevelBorder, padding);
         nextQuestion.setBorder(compoundBorder);
@@ -161,7 +152,7 @@ public class QuizFrame extends javax.swing.JFrame {
         desabilitarRespostas();  
     }
 
-    private void nextQuestionActionPerformed(java.awt.event.ActionEvent evt) {
+    private void nextQuestionActionPerformed(ActionEvent evt) {
         perguntaAtual++;
         carregarPergunta();
     }
@@ -174,12 +165,9 @@ public class QuizFrame extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new QuizFrame().setVisible(true);
-        });
+        EventQueue.invokeLater(() -> new QuizFrame().setVisible(true));
     }
 }
-
 
 class Pergunta {
     private String palavra;
